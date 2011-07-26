@@ -354,7 +354,7 @@ def headless(opts,interesting,data):
                 plot_gen(k,v["key"],v["pivot"])
 
     else:
-        pivot_key = "ejd_hosts_global_sessions"
+        pivot_key = "sys_mem_total"
         for i in interesting:
             if i == pivot_key:
                 continue
@@ -438,6 +438,8 @@ def extract_interesting(options):
     for d in options["data"]:
         (interest, rec) = extract(d)
         interesting.extend(interest)
+        #always include timestamp
+        interesting.append('sys_now')
         #need to make these unique. files could have different 'interesting-ness'
         interesting = [k for k,v in itertools.groupby(sorted(interesting))]
         recs.append(rec)
