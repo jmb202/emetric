@@ -37,7 +37,13 @@
 %%% API
 %%%===================================================================
 deps() -> [emetric_hooks].
-sup() -> ?CHILD(?MODULE,worker).
+sup() -> 
+    Tick = 
+        case emetric_config:get_global(tick) of
+        undefined -> ?TICK;
+        T -> T
+        end,
+    ?CHILD(?MODULE,worker,Tick).
 
 tick() ->
     gen_server:cast(?MODULE, {tick}).

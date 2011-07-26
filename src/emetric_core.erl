@@ -133,7 +133,7 @@ filter_flags([Item | Rest], Commands) ->
 
 version() ->
     {ok, Vsn} = application:get_key(emetric,vsn),
-    ?CONSOLE("emetric vesion: ~s~n",[Vsn]).
+    ?CONSOLE("emetric version: ~s~n",[Vsn]).
 
 help() ->
     OptSpecList = option_spec_list(),
@@ -159,5 +159,7 @@ option_spec_list() ->
     [
      {help, $h, "help", undefined, "Display help message."},
      {node, $n, "node", string, "erlang node to connect to."},
-     {cookie, $c, "cookie", string, "erlang cookie for remote node"}
+     {cookie, $c, "cookie", string, "erlang cookie for remote node"},
+     {local_node, $l, "local_node", string, "local node name."},
+     {tick, $t, "tick", integer, "tick frequency (ms)"}
      ].

@@ -29,14 +29,21 @@ run() ->
     %% if there is a cookie, change ourse
     Cookie = list_to_atom(emetric_config:get_global(cookie)),
     Node = list_to_atom(emetric_config:get_global(node)),
-    ok = ping(Node,Cookie).
+    NetKernelParams =
+        case emetric_config:get_global(local_node) of
+        undefined ->
+            ['emetric@localhost',shortnames];
+        N ->
+            [list_to_atom(N)]
+        end,
+    ok = ping(NetKernelParams,Node,Cookie).
 
 
 
 
-ping(Node,Cookie) ->
+ping(NetKernelParams,Node,Cookie) ->
     %%escript doesn't start this
-    {ok,_Pid} = net_kernel:start(['emetric@localhost',shortnames]),
+    {ok,_Pid} = net_kernel:start(NetKernelParams),
 
     %% it is possible to have the names out of sync in epmd
     %% need to wait for the names to get worked out
