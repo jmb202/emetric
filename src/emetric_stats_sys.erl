@@ -283,7 +283,7 @@ cores(_) ->
 %% only doing linux now
 strategy() ->
     case {os:type(),os:version()} of
-%	{{unix,linux},{2,_,_}} -> {linux, init_linux()};
+	{{unix,linux},{2,_,_}} -> {linux_disabled, init_linux()};
 	_ -> {none,[]}
     end.
     
