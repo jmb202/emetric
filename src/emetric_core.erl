@@ -39,7 +39,7 @@ run(Args) ->
 
     Commands = parse_args(Args),
 
-    ok = crypto:start(),
+    %ok = crypto:start(),
     %% start logger when we have it
 
     application:start(emetric),
